@@ -5,7 +5,7 @@
   "designDocs": [
     "_design/delivery-rounds",
     "_design/daily-deliveries",
-    "_design/facilities"
+    "_design/product-storages"
   ],
   "coreDocTypes": [
     "product",
