@@ -1,4 +1,4 @@
-'use strict';
+  'use strict';
 
 angular.module('home.schedule')
   .controller('HomeScheduleCtrl', function(dailySchedule) {

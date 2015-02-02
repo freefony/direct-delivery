@@ -3,10 +3,10 @@
  */
 
 angular.module('facilities')
-  .service('facilityService', function(dbService,couchUtil){
+  .service('facilityService', function(dbService, couchUtil){
 
     this._get = function(view){
-      return dbService.queryView('')
+      return dbService.queryView(view)
         .then(function(response){
           return response;
         })
@@ -16,7 +16,7 @@ angular.module('facilities')
     };
     this._fetch = function(viewName, param){
 
-      var params = couchUtil.key(params);
+      var params = couchUtil.key(param);
       params.inlcude_docs = true;
       return dbService.getView(viewName, params)
         .then(function(response){
@@ -36,21 +36,21 @@ angular.module('facilities')
     };
 
     this.getByWard = function(wardId){
-      return this._fetch("facilities/by_ward")
+      return this._fetch("facilities/by_ward", wardId)
         .then(function(response){
           return response;
         })
     };
 
     this.getByLga = function(lgaId){
-      return this._fetch("facilities/by_lga")
+      return this._fetch("facilities/by_lga", lgaId)
         .then(function(response){
           return response;
         })
     };
 
     this.getByZone = function(zoneId){
-      return this._fetch("facilities/by_zone")
+      return this._fetch("facilities/by_zone", zoneId)
         .then(function(response){
           return response;
         })

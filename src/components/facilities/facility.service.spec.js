@@ -5,7 +5,7 @@
 describe('facility service', function(){
 
   var mockDBService, facilityService;
-  beforeEach(module('facilities', 'db'));
+  beforeEach(module('facilities', 'db', 'couchdb'));
 
   beforeEach(inject(function(_facilityService_){
     facilityService = _facilityService_;
