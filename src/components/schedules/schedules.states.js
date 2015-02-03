@@ -16,4 +16,7 @@ angular.module('schedules')
           label: 'Schedule'
         }
       })
+      .state('schedules.rounds', {
+
+      })
   });
