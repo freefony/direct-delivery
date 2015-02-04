@@ -6,19 +6,20 @@
 angular.module('schedules')
   .service('scheduleService', function(user, dbService, couchUtil, utility) {
 
-    this.all = function() {
-      //TODO: this should use Auth.currentUser.name see #item:1172
-      var params = couchUtil.key(user.email + '-' + utility.formatDate(new Date()));
+    this.all = function(driverId, date) {
+      var dId = driverId || AuthService.currentUser.name,
+          deliveryDate = date || new Date();
+
+      var params = couchUtil.key(dId + '-' + utility.formatDate(deliveryDate));
       /*eslint-disable camelcase */
       params.include_docs = true;
       /*eslint-enable camelcase */
       return dbService.getView('daily-deliveries/by-driver-date', params);
     };
 
-    this.getDaySchedule = function() {
-      //TODO: this take a driverId(Auth.currentUser.name/email) and date parameter.
-      //#see item:1173
-      return this.all()
+    this.getDaySchedule = function(driverId, date) {
+
+      return this.all(driverId, date)
         .then(couchUtil.pluckDocs)
         .then(utility.first);
     };
