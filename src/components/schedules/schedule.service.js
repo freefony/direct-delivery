@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('schedules')
-  .service('scheduleService', function(user, dbService, couchUtil, utility) {
+  .service('scheduleService', function(AuthService, dbService, couchUtil, utility) {
 
     this.all = function(driverId, date) {
       var dId = driverId || AuthService.currentUser.name,
