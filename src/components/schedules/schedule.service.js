@@ -4,11 +4,11 @@
 'use strict';
 
 angular.module('schedules')
-  .service('scheduleService', function(user, dbService, couchUtil, utility) {
+  .service('scheduleService', function(AuthService, dbService, couchUtil, utility) {
 
     this.all = function() {
       //TODO: this should use Auth.currentUser.name see #item:1172
-      var params = couchUtil.key(user.email + '-' + utility.formatDate(new Date()));
+      var params = couchUtil.key(AuthService.currentUser.name + '-' + utility.formatDate(new Date()));
       /*eslint-disable camelcase */
       params.include_docs = true;
       /*eslint-enable camelcase */
