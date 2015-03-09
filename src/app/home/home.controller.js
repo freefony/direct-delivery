@@ -23,32 +23,16 @@ angular.module('home')
       if (Object.keys(unbind).length === 0) {
         addSyncListeners();
         //add device online status listerners
-        $window.addEventListener('offline', function (evt) {
-
-          vm.syncErr = {
-            state: evt.type === 'offline',
-            msg: "ERROR: sync failed, could not connect to internet"
-          };
-
-          $scope.$digest();
-        });
-
-        $window.addEventListener('online', function (evt) {
-          
-          vm.syncErr = {
-            state: evt.type === 'online',
-            msg: ""
-          };
-
-          $scope.$digest();
-        });
+        vm.isOnline = $window.navigator.onLine ? 'online' : 'offline';
+        $window.addEventListener('offline', updateOnlineState);
+        $window.addEventListener('online', updateOnlineState);
       }
     }
-
     init();
 
-    vm.isOnline = function () {
-      return $window.navigator.onLine;
+    function updateOnlineState () {
+      vm.isOnline = $window.navigator.onLine ? 'online' : 'offline';
+      $scope.$digest();
     };
 
     function removeSyncListeners() {
